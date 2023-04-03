@@ -14,13 +14,12 @@ app.use(express.static("public"));
 
 // Handle the /fetchDatabaseRows endpoint
 app.get("/fetchDatabaseRows/:databaseId", async (req, res) => {
-  const { databaseId } = req.params;
   try {
-    const rows = await fetchDatabaseRows(databaseId);
-    res.json(rows);
+    const databaseId = req.params.databaseId;
+    const databaseRows = await fetchDatabaseRows(databaseId);
+    res.send(databaseRows);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Error fetching database rows");
+    res.status(500).send({ error: error.message });
   }
 });
 

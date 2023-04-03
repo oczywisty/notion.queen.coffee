@@ -108,15 +108,16 @@ async function updateDatabaseItems() {
 }
 
 async function getIngridients() {
-  const ingridientsResponse = await fetch(`/fetchDatabaseRows/${ingridientsDatabase}`);
-  const ingridientsJson = await ingridientsResponse.json();
-
-  const ingridientsById = ingridientsJson.reduce((accumulator, current) => {
-    accumulator[current.id] = current;
-    return accumulator;
-  }, {});
-
-  return ingridientsById;
+  try {
+    const ingridientsResponse = await fetch(`/fetchDatabaseRows/${ingridientsDatabase}`);
+    const ingridients = await ingridientsResponse.json();
+    return ingridients.reduce((accumulator, current) => {
+      accumulator[current.id] = current;
+      return accumulator;
+    }, {});
+  } catch (error) {
+    console.error('Error getting ingredients:', error);
+  }
 }
 
 

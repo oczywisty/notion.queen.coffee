@@ -86,7 +86,7 @@ async function getDatabaseCellValue(itemId, property) {
     }
 
     const item = await notion.pages.retrieve({ page_id: itemId });
-    const value = item.properties[property];
+    const value = item.properties[property]?.number || item.properties[property]?.rich_text?.[0]?.plain_text || null;
 
     cellValueCache.set(cacheKey, value);
 
