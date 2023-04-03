@@ -1,0 +1,13 @@
+{
+  "name": "notion.queen.coffee",
+  "version": "1.0.0",
+  "description": "Notion API to update stock",
+  "main": "index.js",
+  "author": "Paweł Jasiołek",
+  "license": "nocopy",
+  "dependencies": {
+    "@notionhq/client": "^2.2.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
+}

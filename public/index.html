@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notion Database Frontend</title>
+
+
+  <style>
+    /* General styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 100px auto;
+      padding: 30px;
+      background-color: #fff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      border-radius: 4px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin-top: 0;
+    }
+
+    /* Table styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #ddd;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    /* Button styles */
+    button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 10px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition-duration: 0.4s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* Progress counter */
+    #progressCounter {
+      font-weight: bold;
+      color: #333;
+    }
+
+  .database-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+
+  .database-list li {
+    background-color: #f3f3f3;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    padding: 12px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .database-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .database-list li span {
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+
+  .database-list li button {
+    background-color: #0070f3;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .database-list li button:hover {
+    background-color: #0053b3;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Pieczenie</h1>
+    <button id="fetchButton">Pobierz plan pieczenia</button>
+    <ul id="rowsList" class="database-list"></ul>
+
+    <table id="data-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Magazyn (before)</th>
+          <th>Magazyn (after)</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <br><br>
+    <button id="updateButton">Zapisz stany magazynowe</button>
+    <p id="progressCounter"></p>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
