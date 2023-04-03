@@ -1,8 +1,9 @@
 const notion = require("./notionClient");
+const Cache = require("./utils/cache");
 
 // Cache for page details
-const pageDetailsCache = {};
-const cellValueCache = {};
+const pageDetailsCache = new Cache();
+const cellValueCache = new Cache();
 
 // Function to fetch the database rows (pages)
 async function fetchDatabaseRows(databaseId) {
@@ -62,12 +63,13 @@ async function updateDatabaseItemProperty(itemId, property, value) {
 
 async function getPageDetails(pageId) {
   try {
-    if (pageDetailsCache[pageId]) {
-      return pageDetailsCache[pageId];
+    const cachedPage = pageDetailsCache.get(pageId);
+    if (cachedPage) {
+      return cachedPage;
     }
 
     const page = await notion.pages.retrieve(pageId);
-    pageDetailsCache[pageId] = page;
+    pageDetailsCache.set(pageId, page);
     return page;
   } catch (error) {
     throw error;
@@ -77,15 +79,16 @@ async function getPageDetails(pageId) {
 async function getDatabaseCellValue(itemId, property) {
   try {
     const cacheKey = `${itemId}-${property}`;
+    const cachedValue = cellValueCache.get(cacheKey);
 
-    if (cellValueCache[cacheKey]) {
-      return cellValueCache[cacheKey];
+    if (cachedValue) {
+      return cachedValue;
     }
 
-    const item = await notion.pages.retrieve({page_id: itemId});
+    const item = await notion.pages.retrieve({ page_id: itemId });
     const value = item.properties[property];
 
-    cellValueCache[cacheKey] = value;
+    cellValueCache.set(cacheKey, value);
 
     return value;
   } catch (error) {
